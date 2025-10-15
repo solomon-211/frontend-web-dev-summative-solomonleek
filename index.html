@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Life Planner</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <!-- Header section -->
+    <header>
+        <h1>Campus Life Planner</h1>
+    </header>
+
+    <nav role="navigation" aria-label="Main navigation">
+        <ul>
+            <li><button data-section="about" class="active">About</button></li>
+            <li><button data-section="dashboard">Dashboard</button></li>
+            <li><button data-section="tasks">Tasks</button></li>
+            <li><button data-section="add">Add Task</button></li>
+            <li><button data-section="settings">Settings</button></li>
+        </ul>
+    </nav>
+
+    <main id="main-content">
+        <!-- Status Messages -->
+        <div role="status" aria-live="polite" aria-atomic="true" id="status-message" class="status-message"></div>
+
+        <!-- About Section -->
+        <section id="about" class="active">
+            <h2>About Campus Life Planner</h2>
+            <p><strong>Campus Life Planner</strong> is designed to help students stay organised with their academics and personal tasks. This project will help students sort their weekly tasks, such as assignments, study sessions, events, and extracurricular activities—all with effective and efficient time intervals set for specific tasks before embarking on the other task.</p>
+
+            <h3>Contact information & Source</h3>
+            <p>
+                <strong>Email:</strong> s.leek@alustudent.com<br>
+                <strong>GitHub:</strong> <a href="https://github.com/solomon-211/frontend_web_development_summative_assignment">github.com/solomon-211/campus-planner</a>
+            </p>
+        </section>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard">
+            <h2>Dashboard Overview</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Tasks</div>
+                    <div class="stat-value" id="stat-total">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Total Hours</div>
+                    <div class="stat-value" id="stat-hours">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Top Tag</div>
+                    <div class="stat-value" id="stat-top" style="font-size: 1.25rem;">-</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">This Week</div>
+                    <div class="stat-value" id="stat-week">0h</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="weekly-goal">Weekly Time Goal (hours)</label>
+                <input type="number" id="weekly-goal" min="0" step="0.5" placeholder="Set weekly goal">
+            </div>
+            
+            <div role="status" aria-live="assertive" aria-atomic="true" id="goal-status"></div>
+
+            <div class="trend-section">
+                <h3>Time Spent (Last 7 Days)</h3>
+                <div id="trend-chart"></div>
+            </div>
+        </section>
+
+        <!-- Tasks Section -->
+        <section id="tasks">
+            <h2>Your Tasks</h2>
+
+            <fieldset class="controls">
+                <legend>Search Tasks</legend>
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="Enter regex pattern (e.g., study|homework)" aria-label="Search tasks with regex">
+                    <div class="search-options">
+                        <label>
+                            <input type="checkbox" id="case-insensitive" checked> Case insensitive
+                        </label>
+                        <button class="btn btn-secondary btn-sm" id="clear-search">Clear Search</button>
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="table-container">
+                <table id="tasks-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-sort="title">Title</th>
+                            <th class="sortable" data-sort="duration">Duration</th>
+                            <th class="sortable" data-sort="tag">Tag</th>
+                            <th class="sortable" data-sort="dueDate">Due Date</th>
+                            <th class="sortable" data-sort="priority">Priority</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tasks-tbody"></tbody>
+                </table>
+            </div>
+
+            <div class="tasks-cards" id="tasks-cards"></div>
+
+            <div class="empty-state" id="empty-state">
+                <div class="empty-state-icon"></div>
+                <h3>No tasks yet</h3>
+                <p>Add your first task to get organized!</p>
+            </div>
+        </section>
+
+        <!-- Add/Edit Section -->
+        <section id="add">
+            <h2 id="form-title">Add New Task</h2>
+            <fieldset>
+                <legend>Task Details</legend>
+                <div style="margin-bottom: 0.5rem;">
+                    Please fill out the form below to add a new task or edit an existing one.
+                </div>
+            <form id="task-form">
+                <input type="hidden" id="edit-id">
+                
+                <div class="form-group">
+                    <label for="title">Task Title</label>
+                    <input type="text" id="title" required 
+                            aria-required="true"
+                            placeholder="Enter task title"
+                            aria-labelledby="title-label"
+                            aria-describedby="title-error title-help"
+                            pattern="^\S(?:.*\S)?$"
+                            data-advanced-regex="\b(\w+)\s+\1\b">
+                    <div class="error-message">Title cannot have leading/trailing spaces or duplicate words</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="duration">Duration (minutes)</label>
+                    <input type="text" id="duration" required aria-required="true" placeholder="e.g., 90">
+                    <div class="error-message">Enter a valid duration (positive integer)</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tag">Tag </label>
+                    <select id="tag" required aria-required="true">
+                        <option value="">Select tag</option>
+                    </select>
+                    <div class="error-message">Please select a valid tag</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="dueDate">Due Date</label>
+                    <input type="date" id="dueDate" required aria-required="true">
+                    <div class="error-message">Date must be in YYYY-MM-DD format</div>
+                    <div style="margin-top: 0.5rem;">
+                        Date must be in the format YYYY-MM-DD and cannot be in other formats!
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="priority">Priority</label>
+                    <select id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                    <div style="margin-top: 0.5rem;">
+                        Set task priority level
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary" id="submit-btn">Add Task</button>
+                    <button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
+                </div>
+            </form>
+            </fieldset>
+        </section>
+
+        <!-- Settings Section -->
+        <section id="settings">
+            <h2>Settings</h2>
+            <fieldset>
+                <legend>Time Display Preferences</legend>
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="time-unit" value="minutes" checked>
+                    Display in Minutes
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="time-unit" value="hours">
+                    Display in Hours
+                </label>
+            </fieldset>
+            <fieldset>
+            <legend>Data Management</legend>
+            
+            <div class="btn-group">
+                <button class="btn btn-primary" id="export-btn">📥 Export Data (JSON)</button>
+                <label class="btn btn-secondary" style="cursor: pointer;">
+                    📤 Import Data (JSON)
+                    <input type="file" id="import-file" accept=".json" style="display: none;">
+                </label>
+                <div style="margin-top: 0.5rem;">
+                    Download your tasks as a JSON file for backup or transfer. 
+                    You can also import tasks from a JSON file.
+                </div>
+            
+            </fieldset>
+            <fieldset>
+            <legend>Tags</legend>
+            <p>Manage your task tags:</p>
+            <div id="tags-list"></div>
+            
+            <div class="tag-add">
+                <input type="text" id="new-tag" placeholder="New tag name">
+                <button class="btn btn-primary btn-sm" id="add-tag">Add Tag</button>
+            </div>
+            <div style="margin-top: 0.5rem;">
+                Tags can contain letters, spaces, and hyphens only
+            </div>
+            </fieldset>
+
+            <fieldset>
+            <legend>Danger Zone</legend>
+            <button class="btn btn-danger" id="clear-all">Clear All Data</button>
+            <div style="margin-top: 0.5rem;">
+                This will permanently delete all your tasks and cannot be undone unless you have an export backup.
+            </div>
+            </fieldset>
+        </section>
+    </main>
+<!-- Footer section -->
+    <footer>
+        <p>&copy; 2025 Campus Life Planner. Stay organized, stay successful! 🎓</p>
+    </footer>
+
+    <script type="module" src="scripts/main.js"></script>
+</body>
+</html>
