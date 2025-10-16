@@ -653,6 +653,7 @@ footer {
 }
 
 /* Responsive Design */
+/* tablets and up */
 @media (min-width: 768px) {
     header h1 {
         font-size: 2rem;
@@ -688,13 +689,13 @@ footer {
         flex: 1;
     }
 }
-
+/* laptops and up */
 @media (min-width: 1024px) {
     .stats-grid {
         grid-template-columns: repeat(4, 1fr);
     }
 }
-
+/* phones and down */
 @media (max-width: 767px) {
     table {
         display: none;
@@ -716,8 +717,5 @@ footer {
     section {
         box-shadow: none;
     }
-}/* Accessibility Enhancements */
-:focus {
-    outline: 2px solid var(--focus);
-    outline-offset: 2px;
 } 
+
