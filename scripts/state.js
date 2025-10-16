@@ -61,13 +61,6 @@ export function sortTasks(field, order = 'asc') {
             bVal = bVal.toLowerCase();
         }
         
-        // ADD THIS NEW SECTION
-        if (field === 'priority') {
-            const priorityOrder = { high: 3, medium: 2, low: 1 };
-            aVal = priorityOrder[aVal || 'medium'];
-            bVal = priorityOrder[bVal || 'medium'];
-        }
-        
         if (order === 'asc') {
             return aVal > bVal ? 1 : -1;
         } else {
@@ -77,6 +70,7 @@ export function sortTasks(field, order = 'asc') {
     
     state.currentSort = { field, order };
 }
+
 export function getStats() {
     const total = state.tasks.length;
     const totalMinutes = state.tasks.reduce((acc, t) => acc + parseInt(t.duration), 0);

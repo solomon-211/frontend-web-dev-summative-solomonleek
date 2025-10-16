@@ -1,5 +1,6 @@
 import { state, sortTasks, minutesToHours } from './state.js';
 import { highlight } from './search.js';
+import { validateField } from './validators.js';
 
 export function showStatus(message, type = 'success') {
     const status = document.getElementById('status-message');
@@ -145,16 +146,14 @@ export function renderTasks(filteredTasks = null) {
         const titleText = state.searchRegex ? highlight(t.title, state.searchRegex) : t.title;
         const tagText = state.searchRegex ? highlight(t.tag, state.searchRegex) : t.tag;
         const priorityClass = `priority-${t.priority || 'medium'}`;
-        const priorityLabel = (t.priority || 'medium').toUpperCase();
         
-        // Table row with Priority column
+        // Table row
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${titleText}</td>
             <td>${formatDuration(t.duration)}</td>
             <td>${tagText}</td>
             <td>${t.dueDate}</td>
-            <td><span class="${priorityClass}">${priorityLabel}</span></td>
             <td>
                 <button class="btn btn-secondary btn-sm edit-btn" data-id="${t.id}" aria-label="Edit ${t.title}">Edit</button>
                 <button class="btn btn-danger btn-sm delete-btn" data-id="${t.id}" aria-label="Delete ${t.title}">Delete</button>
@@ -171,7 +170,7 @@ export function renderTasks(filteredTasks = null) {
                 <div class="task-card-duration">${formatDuration(t.duration)}</div>
             </div>
             <div class="task-card-details">
-                ${tagText} • ${t.dueDate} • <span class="${priorityClass}">${priorityLabel}</span>
+                ${tagText} • ${t.dueDate} • <span class="${priorityClass}">${(t.priority || 'medium').toUpperCase()}</span>
             </div>
             <div class="btn-group">
                 <button class="btn btn-secondary btn-sm edit-btn" data-id="${t.id}">Edit</button>

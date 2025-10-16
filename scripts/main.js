@@ -125,13 +125,12 @@ function setupForm() {
     
     // ESC key to cancel
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && 
-            document.getElementById('add').classList.contains('active') &&
-            document.getElementById('edit-id').value) {
+        if (e.key === 'Escape' && document.getElementById('edit-id').value) {
             resetForm();
         }
     });
 }
+
 function resetForm() {
     const form = document.getElementById('task-form');
     form.reset();

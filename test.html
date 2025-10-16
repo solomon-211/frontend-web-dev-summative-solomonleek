@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Planner Tests</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+            background: #f9fafb;
+        }
+        h1 {
+            color: #8b5cf6;
+            margin-bottom: 0.5rem;
+        }
+        .subtitle {
+            color: #6b7280;
+            margin-bottom: 2rem;
+        }
+        .test {
+            margin: 1rem 0;
+            padding: 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+        }
+        .pass {
+            background: #d1fae5;
+            border-color: #10b981;
+        }
+        .fail {
+            background: #fee2e2;
+            border-color: #ef4444;
+        }
+        .test-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .test-details {
+            font-size: 0.875rem;
+            color: #4b5563;
+            margin: 0.25rem 0;
+        }
+        .test-status {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+        code {
+            background: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        .summary {
+            background: #8b5cf6;
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .summary h2 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        .category {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid #e5e7eb;
+        }
+        .category h2 {
+            color: #8b5cf6;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>📝 Campus Life Planner - Test Suite</h1>
+    <p class="subtitle">Comprehensive regex validation and pattern testing</p>
+    <div id="test-results"></div>
+
+    <script type="module">
+        import { validateField, VALIDATORS } from './scripts/validators.js';
+
+        const tests = [
+            // Basic Validation Tests
+            {
+                category: 'Title Validation',
+                name: 'Valid title',
+                field: 'title',
+                value: 'Complete math homework',
+                expected: true
+            },
+            {
+                category: 'Title Validation',
+                name: 'Title with leading space (Invalid)',
+                field: 'title',
+                value: ' Study for exam',
+                expected: false
+            },
+            {
+                category: 'Title Validation',
+                name: 'Title with trailing space (Invalid)',
+                field: 'title',
+                value: 'Gym workout ',
+                expected: false
+            },
+            {
+                category: 'Title Validation',
+                name: 'Title with double spaces (Valid)',
+                field: 'title',
+                value: 'Review  notes',
+                expected: true
+            },
+            {
+                category: 'Title Validation',
+                name: 'Single character title',
+                field: 'title',
+                value: 'A',
+                expected: true
+            },
+            
+            // Advanced: Duplicate Word Detection
+            {
+                category: 'Advanced - Duplicate Word Detection',
+                name: 'Duplicate word "study study" (Invalid)',
+                field: 'title',
+                value: 'Study study for exam',
+                expected: false
+            },
+            {
+                category: 'Advanced - Duplicate Word Detection',
+                name: 'Duplicate word "the the" (Invalid)',
+                field: 'title',
+                value: 'Review the the notes',
+                expected: false
+            },
+            {
+                category: 'Advanced - Duplicate Word Detection',
+                name: 'No duplicate words (Valid)',
+                field: 'title',
+                value: 'Study for the exam',
+                expected: true
+            },
+            {
+                category: 'Advanced - Duplicate Word Detection',
+                name: 'Case-insensitive duplicate "Study study" (Invalid)',
+                field: 'title',
+                value: 'Study Study session',
+                expected: false
+            },
+            
+            // Duration Validation
+            {
+                category: 'Duration Validation',
+                name: 'Valid duration - 90 minutes',
+                field: 'duration',
+                value: '90',
+                expected: true
+            },
+            {
+                category: 'Duration Validation',
+                name: 'Valid duration - 1 minute',
+                field: 'duration',
+                value: '1',
+                expected: true
+            },
+            {
+                category: 'Duration Validation',
+                name: 'Valid duration - 240 minutes',
+                field: 'duration',
+                value: '240',
+                expected: true
+            },
+            {
+                category: 'Duration Validation',
+                name: 'Invalid duration - 0 (Invalid)',
+                field: 'duration',
+                value: '0',
+                expected: false
+            },
+            {
+                category: 'Duration Validation',
+                name: 'Invalid duration - negative (Invalid)',
+                field: 'duration',
+                value: '-30',
+                expected: false
+            },
+            {
+                category: 'Duration Validation',
+                name: 'Invalid duration - decimal (Invalid)',
+                field: 'duration',
+                value: '90.5',
+                expected: false
+            },
+            {
+                category: 'Duration Validation',
+                name: 'Invalid duration - leading zero (Invalid)',
+                field: 'duration',
+                value: '090',
+                expected: false
+            },
+            
+            // Date Validation
+            {
+                category: 'Date Validation',
+                name: 'Valid date - 2025-10-15',
+                field: 'date',
+                value: '2025-10-15',
+                expected: true
+            },
+            {
+                category: 'Date Validation',
+                name: 'Valid date - 2025-01-01',
+                field: 'date',
+                value: '2025-01-01',
+                expected: true
+            },
+            {
+                category: 'Date Validation',
+                name: 'Valid date - 2025-12-31',
+                field: 'date',
+                value: '2025-12-31',
+                expected: true
+            },
+            {
+                category: 'Date Validation',
+                name: 'Invalid date format - DD/MM/YYYY',
+                field: 'date',
+                value: '15/10/2025',
+                expected: false
+            },
+            {
+                category: 'Date Validation',
+                name: 'Invalid date - month 13',
+                field: 'date',
+                value: '2025-13-01',
+                expected: false
+            },
+            {
+                category: 'Date Validation',
+                name: 'Invalid date - month 00',
+                field: 'date',
+                value: '2025-00-15',
+                expected: false
+            },
+            {
+                category: 'Date Validation',
+                name: 'Invalid date - day 00',
+                field: 'date',
+                value: '2025-10-00',
+                expected: false
+            },
+            {
+                category: 'Date Validation',
+                name: 'Invalid date - day 32',
+                field: 'date',
+                value: '2025-10-32',
+                expected: false
+            },
+            
+            // Tag Validation
+            {
+                category: 'Tag Validation',
+                name: 'Valid tag - single word',
+                field: 'tag',
+                value: 'Academic',
+                expected: true
+            },
+            {
+                category: 'Tag Validation',
+                name: 'Valid tag - with space',
+                field: 'tag',
+                value: 'Personal Development',
+                expected: true
+            },
+            {
+                category: 'Tag Validation',
+                name: 'Valid tag - with hyphen',
+                field: 'tag',
+                value: 'Extra-Curricular',
+                expected: true
+            },
+            {
+                category: 'Tag Validation',
+                name: 'Valid tag - multiple words',
+                field: 'tag',
+                value: 'Health and Fitness',
+                expected: true
+            },
+            {
+                category: 'Tag Validation',
+                name: 'Invalid tag - with numbers',
+                field: 'tag',
+                value: 'Academic2024',
+                expected: false
+            },
+            {
+                category: 'Tag Validation',
+                name: 'Invalid tag - with special chars',
+                field: 'tag',
+                value: 'Social@Events',
+                expected: false
+            },
+            {
+                category: 'Tag Validation',
+                name: 'Invalid tag - leading space',
+                field: 'tag',
+                value: ' Academic',
+                expected: false
+            },
+            
+            // Advanced Search Patterns
+            {
+                category: 'Search Patterns',
+                name: 'Tag search pattern - @academic',
+                test: () => VALIDATORS.tagSearch.test('@academic'),
+                expected: true
+            },
+            {
+                category: 'Search Patterns',
+                name: 'Tag search pattern - @fitness123',
+                test: () => VALIDATORS.tagSearch.test('@fitness123'),
+                expected: true
+            },
+            {
+                category: 'Search Patterns',
+                name: 'Time pattern - finds "14:30"',
+                test: () => VALIDATORS.timePattern.test('Meeting at 14:30'),
+                expected: true
+            },
+            {
+                category: 'Search Patterns',
+                name: 'Time pattern - finds "9:00"',
+                test: () => VALIDATORS.timePattern.test('Class starts 9:00'),
+                expected: true
+            },
+            {
+                category: 'Search Patterns',
+                name: 'Study keywords - finds "homework"',
+                test: () => VALIDATORS.studyKeywords.test('Complete homework assignment'),
+                expected: true
+            },
+            {
+                category: 'Search Patterns',
+                name: 'Study keywords - finds "exam" (case insensitive)',
+                test: () => VALIDATORS.studyKeywords.test('Prepare for EXAM'),
+                expected: true
+            },
+            {
+                category: 'Search Patterns',
+                name: 'Study keywords - no match',
+                test: () => VALIDATORS.studyKeywords.test('Gym workout session'),
+                expected: false
+            }
+        ];
+
+        function runTests() {
+            const container = document.getElementById('test-results');
+            let passed = 0;
+            let failed = 0;
+            const categories = {};
+
+            // Group tests by category
+            tests.forEach(test => {
+                if (!categories[test.category]) {
+                    categories[test.category] = [];
+                }
+                categories[test.category].push(test);
+            });
+
+            // Run tests and organize by category
+            Object.keys(categories).forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                
+                const categoryTitle = document.createElement('h2');
+                categoryTitle.textContent = category;
+                categoryDiv.appendChild(categoryTitle);
+
+                categories[category].forEach(test => {
+                    const result = test.test ? test.test() : validateField(test.field, test.value);
+                    const pass = result === test.expected;
+                    
+                    if (pass) passed++;
+                    else failed++;
+
+                    const div = document.createElement('div');
+                    div.className = `test ${pass ? 'pass' : 'fail'}`;
+                    
+                    let html = `<div class="test-name">${test.name}</div>`;
+                    
+                    if (test.value !== undefined) {
+                        html += `<div class="test-details">Input: <code>${test.value}</code></div>`;
+                    }
+                    
+                    html += `
+                        <div class="test-details">Expected: <code>${test.expected}</code> | Got: <code>${result}</code></div>
+                        <div class="test-status">${pass ? '✅ PASS' : '❌ FAIL'}</div>
+                    `;
+                    
+                    div.innerHTML = html;
+                    categoryDiv.appendChild(div);
+                });
+
+                container.appendChild(categoryDiv);
+            });
+
+            // Add summary at the top
+            const summary = document.createElement('div');
+            summary.className = 'summary';
+            summary.innerHTML = `
+                <h2>Test Results Summary</h2>
+                <p style="font-size: 1.25rem; margin-top: 0.5rem;">
+                    <strong>${passed}</strong> passed | <strong>${failed}</strong> failed | 
+                    <strong>${tests.length}</strong> total
+                </p>
+                <p style="margin-top: 0.5rem;">
+                    Success Rate: <strong>${((passed / tests.length) * 100).toFixed(1)}%</strong>
+                </p>
+            `;
+            container.insertBefore(summary, container.firstChild);
+        }
+
+        // Run tests when page loads
+        runTests();
+    </script>
+</body>
+</html>
