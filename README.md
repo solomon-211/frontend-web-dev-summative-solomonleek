@@ -2,6 +2,7 @@
 
 # The video link for key features
 -  https://youtu.be/GoTybZeCBlQ
+
 # Deployment for the campus life planner on Github pages
 
 # GitHub Pages:
@@ -61,8 +62,6 @@ Regex ensures invalid characters (@, #, $, %) are blocked except hypens on the t
 Shortcut	Action
 Enter	To enter inside the section
 Ctrl + F	Focus search bar
-Ctrl + E	Export data to file
-Ctrl + Shift + C	Clear all completed tasks
 Tab / Shift + Tab	Navigate through interactive elements
 Esc	Close modals or cancel editing
 
