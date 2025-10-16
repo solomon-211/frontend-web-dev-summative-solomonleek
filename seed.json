@@ -5,7 +5,6 @@
     "duration": 90,
     "tag": "Academic",
     "dueDate": "2025-10-15",
-    "priority": "high",
     "createdAt": "2025-10-10T10:00:00Z",
     "updatedAt": "2025-10-10T10:00:00Z"
   },
@@ -15,7 +14,6 @@
     "duration": 120,
     "tag": "Academic",
     "dueDate": "2025-10-18",
-    "priority": "high",
     "createdAt": "2025-10-09T14:30:00Z",
     "updatedAt": "2025-10-09T14:30:00Z"
   },
@@ -25,7 +23,6 @@
     "duration": 60,
     "tag": "Fitness",
     "dueDate": "2025-10-12",
-    "priority": "medium",
     "createdAt": "2025-10-08T09:00:00Z",
     "updatedAt": "2025-10-08T09:00:00Z"
   },
@@ -35,7 +32,6 @@
     "duration": 45,
     "tag": "Social",
     "dueDate": "2025-10-13",
-    "priority": "medium",
     "createdAt": "2025-10-07T16:20:00Z",
     "updatedAt": "2025-10-07T16:20:00Z"
   },
@@ -45,7 +41,6 @@
     "duration": 150,
     "tag": "Academic",
     "dueDate": "2025-10-20",
-    "priority": "high",
     "createdAt": "2025-10-06T11:45:00Z",
     "updatedAt": "2025-10-06T11:45:00Z"
   },
@@ -55,7 +50,6 @@
     "duration": 30,
     "tag": "Academic",
     "dueDate": "2025-10-11",
-    "priority": "low",
     "createdAt": "2025-10-05T13:00:00Z",
     "updatedAt": "2025-10-05T13:00:00Z"
   },
@@ -65,7 +59,6 @@
     "duration": 75,
     "tag": "Academic",
     "dueDate": "2025-10-17",
-    "priority": "high",
     "createdAt": "2025-10-04T10:30:00Z",
     "updatedAt": "2025-10-04T10:30:00Z"
   },
@@ -75,7 +68,6 @@
     "duration": 50,
     "tag": "Fitness",
     "dueDate": "2025-10-14",
-    "priority": "low",
     "createdAt": "2025-10-03T15:00:00Z",
     "updatedAt": "2025-10-03T15:00:00Z"
   },
@@ -85,7 +77,6 @@
     "duration": 90,
     "tag": "Social",
     "dueDate": "2025-10-16",
-    "priority": "medium",
     "createdAt": "2025-10-02T12:00:00Z",
     "updatedAt": "2025-10-02T12:00:00Z"
   },
@@ -95,7 +86,6 @@
     "duration": 180,
     "tag": "Academic",
     "dueDate": "2025-10-19",
-    "priority": "high",
     "createdAt": "2025-10-01T09:15:00Z",
     "updatedAt": "2025-10-01T09:15:00Z"
   },
@@ -105,7 +95,6 @@
     "duration": 120,
     "tag": "Personal",
     "dueDate": "2025-10-14",
-    "priority": "medium",
     "createdAt": "2025-09-30T14:00:00Z",
     "updatedAt": "2025-09-30T14:00:00Z"
   },
@@ -115,7 +104,6 @@
     "duration": 120,
     "tag": "Social",
     "dueDate": "2025-10-21",
-    "priority": "low",
     "createdAt": "2025-09-29T10:00:00Z",
     "updatedAt": "2025-09-29T10:00:00Z"
   }
