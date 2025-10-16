@@ -1,5 +1,14 @@
 # Campus Life Planner
 
+# The video link for key features
+-  https://youtu.be/GoTybZeCBlQ
+# Deployment for the campus life planner on Github pages
+
+# GitHub Pages:
+Go to Settings → Pages → Branch: main → /root, then visit the provided link.
+
+# Here the link for it: https://solomon-211.github.io/frontend-web-dev-summative-solomonleek/
+
 The **Campus Life Planner** is a responsive web app built with **HTML, CSS, JSON, and JavaScript** to help students organize daily campus activities such as classes, assignments, and events.  
 It demonstrates modern **front-end development**, **data storage**, and **UI accessibility** techniques using only vanilla technologies.
 
@@ -23,8 +32,6 @@ cd campus-life-planner
 
 Simply open the index.html file in your web browser.
 
-GitHub Pages:
-Go to Settings → Pages → Branch: main → /root, then visit the provided link.
 
 ## Features List
 Feature	Description
@@ -46,11 +53,9 @@ Keyword Search	/keyword/i	Case-insensitive search across task names and tags.
 
 ### Edge Cases Tested
 
-Empty or whitespace-only inputs rejected.
-
+Empty or whitespaces for trailing and leading whitespaces on the task title, but not on the search task.
 Duplicate /\b(\w+)\s+\1\b/i task titles prevented.
-
-Regex ensures invalid characters (@, #, $, %) are blocked.
+Regex ensures invalid characters (@, #, $, %) are blocked except hypens on the tag addings, and task titles.
 
 ### Keyboard Map
 Shortcut	Action
@@ -89,6 +94,6 @@ CSS3 – Responsive grid & Flexbox design
 
 JavaScript (ES6) – DOM interaction, logic & data management
 
-LocalStorage API – Persistent data
+LocalStorage JSON File for export and import
 
 Regex – Validation & filtering
