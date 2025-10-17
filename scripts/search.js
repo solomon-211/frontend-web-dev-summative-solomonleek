@@ -1,3 +1,6 @@
+// ================================================
+// Search functionality for tasks
+// ================================================
 export function compileRegex(input, flags = 'gi') {
     try {
         return input ? new RegExp(input, flags) : null;
@@ -5,7 +8,7 @@ export function compileRegex(input, flags = 'gi') {
         return null;
     }
 }
-
+// Highlight text matches with the search regex
 export function highlight(text, regex) {
     if (!regex || typeof text !== 'string') return text;
     
@@ -15,7 +18,7 @@ export function highlight(text, regex) {
         return text;
     }
 }
-
+// Search tasks based on the provided regex
 export function searchTasks(tasks, regex) {
     if (!regex) return tasks;
     

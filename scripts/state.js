@@ -1,7 +1,6 @@
 // ================================================
-// State Management Module
-// ================================
 // State management for tasks and settings
+// ================================================
 export const state = {
     tasks: [],
     tags: ['Academic', 'Fitness', 'Social', 'Personal', 'Work', 'Other'],

@@ -1,3 +1,6 @@
+// ================================================
+// Main application logic for Task Manager
+// ================================================
 import { state, addTask, updateTask } from './state.js';
 import { loadData, saveData, loadSettings, saveSettings, exportData, validateImportData } from './storage.js';
 import { validateField } from './validators.js';
