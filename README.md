@@ -1,7 +1,7 @@
 # Campus Life Planner
 
 # The video link for key features
--  https://youtu.be/GoTybZeCBlQ
+-  https://youtu.be/C6gBEXxUh9w
 
 # Deployment for the campus life planner on Github pages
 
