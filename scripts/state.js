@@ -60,7 +60,12 @@ export function sortTasks(field, order = 'asc') {
             aVal = aVal.toLowerCase();
             bVal = bVal.toLowerCase();
         }
-        
+
+        if (field === 'priority') {
+            aVal = aVal.toLowerCase();
+            bVal = bVal.toLowerCase();
+        }
+
         if (order === 'asc') {
             return aVal > bVal ? 1 : -1;
         } else {

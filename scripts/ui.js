@@ -154,6 +154,7 @@ export function renderTasks(filteredTasks = null) {
             <td>${formatDuration(t.duration)}</td>
             <td>${tagText}</td>
             <td>${t.dueDate}</td>
+            <td><span class="${priorityClass}">${(t.priority || 'medium').toUpperCase()}</span></td>
             <td>
                 <button class="btn btn-secondary btn-sm edit-btn" data-id="${t.id}" aria-label="Edit ${t.title}">Edit</button>
                 <button class="btn btn-danger btn-sm delete-btn" data-id="${t.id}" aria-label="Delete ${t.title}">Delete</button>
