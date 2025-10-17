@@ -12,6 +12,7 @@ export const VALIDATORS = {
     studyKeywords: /(study|homework|assignment|exam|quiz)/i
 };
 
+// Validate individual fields
 export function validateField(field, value) {
     if (!value) return false;
     
@@ -27,7 +28,7 @@ export function validateField(field, value) {
     
     return true;
 }
-
+// Validate entire task object
 export function validateTask(task) {
     const errors = {};
     

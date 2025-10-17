@@ -1,3 +1,4 @@
+// ui.js - Handles all UI rendering and updates
 import { state, sortTasks, minutesToHours } from './state.js';
 import { highlight } from './search.js';
 import { validateField } from './validators.js';
@@ -18,7 +19,7 @@ export function formatDuration(minutes) {
     }
     return `${minutes} min`;
 }
-
+// Update dashboard statistics
 export function updateDashboard() {
     const stats = getStatsData();
     
@@ -30,7 +31,7 @@ export function updateDashboard() {
     updateTrendChart();
     updateGoalStatus(parseFloat(stats.weekHours));
 }
-
+// Get statistics data
 function getStatsData() {
     const total = state.tasks.length;
     const totalMinutes = state.tasks.reduce((acc, t) => acc + parseInt(t.duration), 0);
@@ -53,7 +54,7 @@ function getStatsData() {
     
     return { total, totalHours, topTag, weekHours };
 }
-
+// Update trend chart
 function updateTrendChart() {
     const chart = document.getElementById('trend-chart');
     chart.innerHTML = '';
@@ -97,7 +98,7 @@ function updateTrendChart() {
         chart.appendChild(bar);
     });
 }
-
+// Update goal status display
 function updateGoalStatus(weekHours) {
     const goalStatus = document.getElementById('goal-status');
     const goal = state.weeklyGoal;
@@ -125,7 +126,7 @@ function updateGoalStatus(weekHours) {
         goalStatus.setAttribute('aria-live', 'polite');
     }
 }
-
+// Render tasks in table and mobile card views
 export function renderTasks(filteredTasks = null) {
     const tasks = filteredTasks || state.tasks;
     const tbody = document.getElementById('tasks-tbody');
@@ -183,7 +184,7 @@ export function renderTasks(filteredTasks = null) {
     
     attachTaskEventListeners();
 }
-
+// Attach event listeners to edit and delete buttons
 function attachTaskEventListeners() {
     document.querySelectorAll('.edit-btn').forEach(btn => {
         btn.addEventListener('click', handleEdit);
@@ -193,7 +194,7 @@ function attachTaskEventListeners() {
         btn.addEventListener('click', handleDelete);
     });
 }
-
+// Handle edit button click
 function handleEdit(e) {
     const id = e.target.dataset.id;
     const task = state.tasks.find(t => t.id === id);
@@ -238,7 +239,7 @@ function handleDelete(e) {
         }
     }
 }
-
+// Update tag select options
 export function updateTagSelect() {
     const select = document.getElementById('tag');
     const currentValue = select.value;
@@ -255,7 +256,7 @@ export function updateTagSelect() {
         select.value = currentValue;
     }
 }
-
+// Render settings form
 export function renderSettings() {
     document.getElementById('weekly-goal').value = state.weeklyGoal || '';
     
@@ -300,7 +301,7 @@ function renderTags() {
         });
     });
 }
-
+// Setup table sorting
 export function setupTableSort() {
     document.querySelectorAll('th.sortable').forEach(th => {
         th.addEventListener('click', () => {
@@ -324,6 +325,7 @@ export function setupTableSort() {
     });
 }
 
+// Validate form field
 export function validateFormField(field, input) {
     const formGroup = input.closest('.form-group');
     const value = input.value.trim();

@@ -1,3 +1,4 @@
+// Calculate the summary statistics for total amount, count, and top category from records
 export function calcTotals(records){
 const total = records.reduce((s,r)=>s + Number(r.amount||0), 0);
 const count = records.length;
@@ -6,7 +7,7 @@ const topCategory = Object.keys(byCat).sort((a,b)=>byCat[b]-byCat[a])[0] || null
 return {total,count,topCategory,byCat};
 }
 
-
+// Generate the last 7 days trend from records based on date and hours
 export function last7DaysTrend(records){
 const days = Array.from({length:7}, (_,i)=>{
 const d = new Date(); d.setDate(d.getDate()- (6-i));

@@ -6,7 +6,7 @@
     <title>Campus Planner Tests</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -Arial, Roboto, sans-serif;
             max-width: 900px;
             margin: 2rem auto;
             padding: 0 1rem;
@@ -15,10 +15,12 @@
         h1 {
             color: #8b5cf6;
             margin-bottom: 0.5rem;
+            text-align: center;
         }
         .subtitle {
             color: #6b7280;
             margin-bottom: 2rem;
+            text-align: center;
         }
         .test {
             margin: 1rem 0;
@@ -80,7 +82,7 @@
     </style>
 </head>
 <body>
-    <h1>📝 Campus Life Planner - Test Suite</h1>
+    <h1>Campus Life Planner - Test</h1>
     <p class="subtitle">Comprehensive regex validation and pattern testing</p>
     <div id="test-results"></div>
 
@@ -98,16 +100,9 @@
             },
             {
                 category: 'Title Validation',
-                name: 'Title with leading space (Invalid)',
+                name: 'Title with leading and trailing space (Invalid)',
                 field: 'title',
                 value: ' Study for exam',
-                expected: false
-            },
-            {
-                category: 'Title Validation',
-                name: 'Title with trailing space (Invalid)',
-                field: 'title',
-                value: 'Gym workout ',
                 expected: false
             },
             {

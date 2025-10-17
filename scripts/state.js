@@ -1,3 +1,7 @@
+// ================================================
+// State Management Module
+// ================================
+// State management for tasks and settings
 export const state = {
     tasks: [],
     tags: ['Academic', 'Fitness', 'Social', 'Personal', 'Work', 'Other'],
@@ -7,11 +11,11 @@ export const state = {
     editingId: null,
     searchRegex: null
 };
-
+// Generate a unique ID for a new task
 export function generateId() {
     return 'task_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 }
-
+// Add a new task to the state
 export function addTask(task) {
     const now = new Date().toISOString();
     const newTask = {
@@ -23,7 +27,7 @@ export function addTask(task) {
     state.tasks.push(newTask);
     return newTask;
 }
-
+// Update an existing task by ID
 export function updateTask(id, updates) {
     const index = state.tasks.findIndex(t => t.id === id);
     if (index !== -1) {
@@ -36,7 +40,7 @@ export function updateTask(id, updates) {
     }
     return null;
 }
-
+// Delete a task by ID
 export function deleteTask(id) {
     const index = state.tasks.findIndex(t => t.id === id);
     if (index !== -1) {
@@ -45,7 +49,7 @@ export function deleteTask(id) {
     }
     return false;
 }
-
+// Sort tasks by specified field and order
 export function sortTasks(field, order = 'asc') {
     state.tasks.sort((a, b) => {
         let aVal = a[field];
@@ -75,7 +79,7 @@ export function sortTasks(field, order = 'asc') {
     
     state.currentSort = { field, order };
 }
-
+// Get summary statistics for tasks
 export function getStats() {
     const total = state.tasks.length;
     const totalMinutes = state.tasks.reduce((acc, t) => acc + parseInt(t.duration), 0);
@@ -100,7 +104,7 @@ export function getStats() {
     
     return { total, totalHours, topTag, weekHours, weekMinutes, totalMinutes };
 }
-
+// Get trend data for the last 7 days
 export function getTrendData() {
     const days = [];
     const hours = [];
@@ -120,11 +124,11 @@ export function getTrendData() {
     
     return { days, hours };
 }
-
+// Convert time interval in minutes to hours
 export function minutesToHours(minutes) {
     return (minutes / 60).toFixed(2);
 }
-
+// Convert time interval in hours to minutes
 export function hoursToMinutes(hours) {
     return Math.round(hours * 60);
 }
